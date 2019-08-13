@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OnMobileTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblContent">
+          <Key>
+            <PropertyRef Name="contentId" />
+          </Key>
+          <Property Name="contentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bookName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="bookAuthorName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblContentGallary">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contentId" Type="int" />
+          <Property Name="gallaryId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblGallary">
+          <Key>
+            <PropertyRef Name="gallaryId" />
+          </Key>
+          <Property Name="gallaryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="gallaryName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="gallaryDescription" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblConten__conte__145C0A3F">
+          <End Role="tblContent" Type="Self.tblContent" Multiplicity="0..1" />
+          <End Role="tblContentGallary" Type="Self.tblContentGallary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContent">
+              <PropertyRef Name="contentId" />
+            </Principal>
+            <Dependent Role="tblContentGallary">
+              <PropertyRef Name="contentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblConten__galla__15502E78">
+          <End Role="tblGallary" Type="Self.tblGallary" Multiplicity="0..1" />
+          <End Role="tblContentGallary" Type="Self.tblContentGallary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGallary">
+              <PropertyRef Name="gallaryId" />
+            </Principal>
+            <Dependent Role="tblContentGallary">
+              <PropertyRef Name="gallaryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnMobileTestModelStoreContainer">
+          <EntitySet Name="tblContent" EntityType="Self.tblContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContentGallary" EntityType="Self.tblContentGallary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGallary" EntityType="Self.tblGallary" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblConten__conte__145C0A3F" Association="Self.FK__tblConten__conte__145C0A3F">
+            <End Role="tblContent" EntitySet="tblContent" />
+            <End Role="tblContentGallary" EntitySet="tblContentGallary" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblConten__galla__15502E78" Association="Self.FK__tblConten__galla__15502E78">
+            <End Role="tblGallary" EntitySet="tblGallary" />
+            <End Role="tblContentGallary" EntitySet="tblContentGallary" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OnMobileTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblContent">
+          <Key>
+            <PropertyRef Name="contentId" />
+          </Key>
+          <Property Name="contentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bookName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bookAuthorName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblContentGallaries" Relationship="Self.FK__tblConten__conte__145C0A3F" FromRole="tblContent" ToRole="tblContentGallary" />
+        </EntityType>
+        <EntityType Name="tblContentGallary">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contentId" Type="Int32" />
+          <Property Name="gallaryId" Type="Int32" />
+          <NavigationProperty Name="tblContent" Relationship="Self.FK__tblConten__conte__145C0A3F" FromRole="tblContentGallary" ToRole="tblContent" />
+          <NavigationProperty Name="tblGallary" Relationship="Self.FK__tblConten__galla__15502E78" FromRole="tblContentGallary" ToRole="tblGallary" />
+        </EntityType>
+        <EntityType Name="tblGallary">
+          <Key>
+            <PropertyRef Name="gallaryId" />
+          </Key>
+          <Property Name="gallaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="gallaryName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gallaryDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblContentGallaries" Relationship="Self.FK__tblConten__galla__15502E78" FromRole="tblGallary" ToRole="tblContentGallary" />
+        </EntityType>
+        <Association Name="FK__tblConten__conte__145C0A3F">
+          <End Role="tblContent" Type="Self.tblContent" Multiplicity="0..1" />
+          <End Role="tblContentGallary" Type="Self.tblContentGallary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContent">
+              <PropertyRef Name="contentId" />
+            </Principal>
+            <Dependent Role="tblContentGallary">
+              <PropertyRef Name="contentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblConten__galla__15502E78">
+          <End Role="tblGallary" Type="Self.tblGallary" Multiplicity="0..1" />
+          <End Role="tblContentGallary" Type="Self.tblContentGallary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGallary">
+              <PropertyRef Name="gallaryId" />
+            </Principal>
+            <Dependent Role="tblContentGallary">
+              <PropertyRef Name="gallaryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnMobileTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblContents" EntityType="Self.tblContent" />
+          <EntitySet Name="tblContentGallaries" EntityType="Self.tblContentGallary" />
+          <EntitySet Name="tblGallaries" EntityType="Self.tblGallary" />
+          <AssociationSet Name="FK__tblConten__conte__145C0A3F" Association="Self.FK__tblConten__conte__145C0A3F">
+            <End Role="tblContent" EntitySet="tblContents" />
+            <End Role="tblContentGallary" EntitySet="tblContentGallaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblConten__galla__15502E78" Association="Self.FK__tblConten__galla__15502E78">
+            <End Role="tblGallary" EntitySet="tblGallaries" />
+            <End Role="tblContentGallary" EntitySet="tblContentGallaries" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OnMobileTestModelStoreContainer" CdmEntityContainer="OnMobileTestEntities">
+          <EntitySetMapping Name="tblContents">
+            <EntityTypeMapping TypeName="OnMobileTestModel.tblContent">
+              <MappingFragment StoreEntitySet="tblContent">
+                <ScalarProperty Name="contentId" ColumnName="contentId" />
+                <ScalarProperty Name="bookName" ColumnName="bookName" />
+                <ScalarProperty Name="bookAuthorName" ColumnName="bookAuthorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContentGallaries">
+            <EntityTypeMapping TypeName="OnMobileTestModel.tblContentGallary">
+              <MappingFragment StoreEntitySet="tblContentGallary">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="contentId" ColumnName="contentId" />
+                <ScalarProperty Name="gallaryId" ColumnName="gallaryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGallaries">
+            <EntityTypeMapping TypeName="OnMobileTestModel.tblGallary">
+              <MappingFragment StoreEntitySet="tblGallary">
+                <ScalarProperty Name="gallaryId" ColumnName="gallaryId" />
+                <ScalarProperty Name="gallaryName" ColumnName="gallaryName" />
+                <ScalarProperty Name="gallaryDescription" ColumnName="gallaryDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

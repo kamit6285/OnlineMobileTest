@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OnMobileTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblContent">
+    <Key>
+      <PropertyRef Name="contentId" />
+    </Key>
+    <Property Name="contentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bookName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bookAuthorName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblContentGallaries" Relationship="Self.FK__tblConten__conte__145C0A3F" FromRole="tblContent" ToRole="tblContentGallary" />
+  </EntityType>
+  <EntityType Name="tblContentGallary">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="contentId" Type="Int32" />
+    <Property Name="gallaryId" Type="Int32" />
+    <NavigationProperty Name="tblContent" Relationship="Self.FK__tblConten__conte__145C0A3F" FromRole="tblContentGallary" ToRole="tblContent" />
+    <NavigationProperty Name="tblGallary" Relationship="Self.FK__tblConten__galla__15502E78" FromRole="tblContentGallary" ToRole="tblGallary" />
+  </EntityType>
+  <EntityType Name="tblGallary">
+    <Key>
+      <PropertyRef Name="gallaryId" />
+    </Key>
+    <Property Name="gallaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="gallaryName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gallaryDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblContentGallaries" Relationship="Self.FK__tblConten__galla__15502E78" FromRole="tblGallary" ToRole="tblContentGallary" />
+  </EntityType>
+  <Association Name="FK__tblConten__conte__145C0A3F">
+    <End Role="tblContent" Type="Self.tblContent" Multiplicity="0..1" />
+    <End Role="tblContentGallary" Type="Self.tblContentGallary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblContent">
+        <PropertyRef Name="contentId" />
+      </Principal>
+      <Dependent Role="tblContentGallary">
+        <PropertyRef Name="contentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblConten__galla__15502E78">
+    <End Role="tblGallary" Type="Self.tblGallary" Multiplicity="0..1" />
+    <End Role="tblContentGallary" Type="Self.tblContentGallary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGallary">
+        <PropertyRef Name="gallaryId" />
+      </Principal>
+      <Dependent Role="tblContentGallary">
+        <PropertyRef Name="gallaryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OnMobileTestEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblContents" EntityType="Self.tblContent" />
+    <EntitySet Name="tblContentGallaries" EntityType="Self.tblContentGallary" />
+    <EntitySet Name="tblGallaries" EntityType="Self.tblGallary" />
+    <AssociationSet Name="FK__tblConten__conte__145C0A3F" Association="Self.FK__tblConten__conte__145C0A3F">
+      <End Role="tblContent" EntitySet="tblContents" />
+      <End Role="tblContentGallary" EntitySet="tblContentGallaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblConten__galla__15502E78" Association="Self.FK__tblConten__galla__15502E78">
+      <End Role="tblGallary" EntitySet="tblGallaries" />
+      <End Role="tblContentGallary" EntitySet="tblContentGallaries" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

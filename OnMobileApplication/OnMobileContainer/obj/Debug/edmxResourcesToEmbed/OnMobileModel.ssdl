@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OnMobileTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblContent">
+    <Key>
+      <PropertyRef Name="contentId" />
+    </Key>
+    <Property Name="contentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bookName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="bookAuthorName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblContentGallary">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="contentId" Type="int" />
+    <Property Name="gallaryId" Type="int" />
+  </EntityType>
+  <EntityType Name="tblGallary">
+    <Key>
+      <PropertyRef Name="gallaryId" />
+    </Key>
+    <Property Name="gallaryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="gallaryName" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="gallaryDescription" Type="varchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__tblConten__conte__145C0A3F">
+    <End Role="tblContent" Type="Self.tblContent" Multiplicity="0..1" />
+    <End Role="tblContentGallary" Type="Self.tblContentGallary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblContent">
+        <PropertyRef Name="contentId" />
+      </Principal>
+      <Dependent Role="tblContentGallary">
+        <PropertyRef Name="contentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblConten__galla__15502E78">
+    <End Role="tblGallary" Type="Self.tblGallary" Multiplicity="0..1" />
+    <End Role="tblContentGallary" Type="Self.tblContentGallary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGallary">
+        <PropertyRef Name="gallaryId" />
+      </Principal>
+      <Dependent Role="tblContentGallary">
+        <PropertyRef Name="gallaryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OnMobileTestModelStoreContainer">
+    <EntitySet Name="tblContent" EntityType="Self.tblContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblContentGallary" EntityType="Self.tblContentGallary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblGallary" EntityType="Self.tblGallary" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tblConten__conte__145C0A3F" Association="Self.FK__tblConten__conte__145C0A3F">
+      <End Role="tblContent" EntitySet="tblContent" />
+      <End Role="tblContentGallary" EntitySet="tblContentGallary" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblConten__galla__15502E78" Association="Self.FK__tblConten__galla__15502E78">
+      <End Role="tblGallary" EntitySet="tblGallary" />
+      <End Role="tblContentGallary" EntitySet="tblContentGallary" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

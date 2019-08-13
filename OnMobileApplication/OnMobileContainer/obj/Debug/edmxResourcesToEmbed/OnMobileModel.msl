@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OnMobileTestModelStoreContainer" CdmEntityContainer="OnMobileTestEntities">
+    <EntitySetMapping Name="tblContents">
+      <EntityTypeMapping TypeName="OnMobileTestModel.tblContent">
+        <MappingFragment StoreEntitySet="tblContent">
+          <ScalarProperty Name="contentId" ColumnName="contentId" />
+          <ScalarProperty Name="bookName" ColumnName="bookName" />
+          <ScalarProperty Name="bookAuthorName" ColumnName="bookAuthorName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblContentGallaries">
+      <EntityTypeMapping TypeName="OnMobileTestModel.tblContentGallary">
+        <MappingFragment StoreEntitySet="tblContentGallary">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="contentId" ColumnName="contentId" />
+          <ScalarProperty Name="gallaryId" ColumnName="gallaryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblGallaries">
+      <EntityTypeMapping TypeName="OnMobileTestModel.tblGallary">
+        <MappingFragment StoreEntitySet="tblGallary">
+          <ScalarProperty Name="gallaryId" ColumnName="gallaryId" />
+          <ScalarProperty Name="gallaryName" ColumnName="gallaryName" />
+          <ScalarProperty Name="gallaryDescription" ColumnName="gallaryDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
